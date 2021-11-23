@@ -384,11 +384,7 @@ const updateAttributes = (tagName, attributes) => {
         return;
     }
 
-    const helmetAttributeString = elementTag.getAttribute(HELMET_ATTRIBUTE);
-    const helmetAttributes = helmetAttributeString
-        ? helmetAttributeString.split(",")
-        : [];
-    const attributesToRemove = [].concat(helmetAttributes);
+
     const attributeKeys = Object.keys(attributes);
 
     for (let i = 0; i < attributeKeys.length; i++) {
@@ -399,10 +395,6 @@ const updateAttributes = (tagName, attributes) => {
             elementTag.setAttribute(attribute, value);
         }
 
-        if (helmetAttributes.indexOf(attribute) === -1) {
-            helmetAttributes.push(attribute);
-        }
-
         const indexToSave = attributesToRemove.indexOf(attribute);
         if (indexToSave !== -1) {
             attributesToRemove.splice(indexToSave, 1);
@@ -411,14 +403,6 @@ const updateAttributes = (tagName, attributes) => {
 
     for (let i = attributesToRemove.length - 1; i >= 0; i--) {
         elementTag.removeAttribute(attributesToRemove[i]);
-    }
-
-    if (helmetAttributes.length === attributesToRemove.length) {
-        elementTag.removeAttribute(HELMET_ATTRIBUTE);
-    } else if (
-        elementTag.getAttribute(HELMET_ATTRIBUTE) !== attributeKeys.join(",")
-    ) {
-        elementTag.setAttribute(HELMET_ATTRIBUTE, attributeKeys.join(","));
     }
 };
 
