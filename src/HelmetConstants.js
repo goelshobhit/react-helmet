@@ -63,4 +63,4 @@ export const SELF_CLOSING_TAGS = [
     TAG_NAMES.STYLE
 ];
 
-export const HELMET_ATTRIBUTE = "data-react-helmet";
+export const HELMET_ATTRIBUTE = "";
